@@ -25,7 +25,7 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
       child: Consumer<ThemeChangeModel>(
           builder: (context, ThemeChangeModel themeProvider,child){
         return Container(
-          color: appBarColor.withOpacity(widget.opacity!),
+          color: blueGrey900.withOpacity(widget.opacity!),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(
@@ -44,7 +44,7 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        buildTextWidget("Discover",fontColor: isHovering[0] ? appBarTextLightBlueColor : whiteColor ),
+                        buildTextWidget("Discover",fontColor: isHovering[0] ? blue200 : whiteColor ),
                         const SizedBox(height: 5.0,),
                         Visibility(
                           visible: isHovering[0],
@@ -69,7 +69,7 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        buildTextWidget("Contact Us",fontColor: isHovering[1] ? appBarTextLightBlueColor : whiteColor),
+                        buildTextWidget("Contact Us",fontColor: isHovering[1] ? blue200 : whiteColor),
                         const SizedBox(height: 5.0,),
                         Visibility(
                           visible: isHovering[1],
@@ -84,7 +84,7 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
                     )
                 ),
                 const Spacer(),
-                buildTextWidget(themeProvider.isDark ? "Dark Mode": "Light Mode",fontColor: whiteColor),
+                buildTextWidget(themeProvider.isDark ? "Dark Mode": "Light Mode",fontColor: whiteColor,fontSize: 12.0),
                 IconButton(
                     onPressed: (){
                       setState(() {
@@ -106,7 +106,7 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
                         isHovering[2] = value;
                       });
                     },
-                    child: buildTextWidget("Sign Up",fontColor:isHovering[2] ? appBarTextLightBlueColor : whiteColor,)),
+                    child: buildTextWidget("Sign Up",fontColor:isHovering[2] ? blue200 : whiteColor,)),
                 const SizedBox(width: 10.0,),
                 InkWell(
                   onTap: (){},
@@ -115,7 +115,7 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
                       isHovering[3] = value;
                     });
                   },
-                  child: buildTextWidget("Login",fontColor: isHovering[3] ? appBarTextLightBlueColor : whiteColor,),
+                  child: buildTextWidget("Login",fontColor: isHovering[3] ? blue200 : whiteColor,),
                 ),
                 const SizedBox(width: 10.0,),
               ],

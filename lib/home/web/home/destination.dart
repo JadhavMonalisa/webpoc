@@ -27,11 +27,14 @@ class _DestinationsState extends State<Destinations> {
     return Consumer<ThemeChangeModel> (
     builder: (context,ThemeChangeModel themeProvider,child)
     {
+      print("screenSize.width");
+      print(screenSize.width);
+      print("screenSize.height");
+      print(screenSize.height);
       return Column(
         children: [
           const SizedBox(height: 50.0,),
           buildTextWidget("Destination Diversity",fontColor: themeProvider.isDark ? whiteColor : blackColor,fontWeight: FontWeight.bold,fontSize: 20.0),
-          const SizedBox(height: 20.0,),
           Stack(
             alignment: Alignment.center,
             children: [
@@ -45,7 +48,7 @@ class _DestinationsState extends State<Destinations> {
                       child: Image.asset(Strings.destinationSliderImages[itemIndex],fit: BoxFit.cover,),
                     ),
                 options: CarouselOptions(
-                    autoPlay: false,
+                    autoPlay: true,
                     enlargeCenterPage: true,
                     viewportFraction: 0.7,
                     aspectRatio: 20 / 8,
@@ -71,77 +74,75 @@ class _DestinationsState extends State<Destinations> {
               ///destination title
               ResponsiveWidget.isSmallScreen(context)
                   ? AspectRatio(
-                aspectRatio: 16/7,
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child:  Padding(
-                    padding: EdgeInsets.only(
-                        top: screenSize.width / 3,
-                        left: screenSize.width / 6,
-                        right: screenSize.width / 6),
-                    child: Card(
-                        elevation: 5,
-                        child: Align(
-                            alignment: Alignment.topCenter,
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
-                              children: [
-                                for (int i = 0; i < Strings.destinationSliderTitle.length; i++)
-                                  Column(
-                                    children: [
-                                      InkWell(
-                                        splashColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        onHover: (value) {
-                                          setState(() {
-                                            value
-                                                ? isHovering[i] = true
-                                                : isHovering[i] = false;
-                                          });
-                                        },
-                                        onTap: () {
-                                          _controller.animateToPage(i);
-                                        },
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 5.0,right: 5.0,
-                                              top: screenSize.height / 80,
-                                              bottom: screenSize.height / 90),
-                                          child: buildTextWidget(Strings.destinationSliderTitle[i],
-                                              fontColor: themeProvider.isDark
-                                                  ? isHovering[i] ? Colors.lightBlue[200]! : Colors.lightBlue
-                                                  : isHovering[i] ? Colors.blueGrey[900]! : Colors.blueGrey),
-                                        ),
-                                      ),
-                                      Visibility(
-                                        maintainSize: true,
-                                        maintainAnimation: true,
-                                        maintainState: true,
-                                        visible: isSelected[i],
-                                        child: AnimatedOpacity(
-                                          duration: const Duration(milliseconds: 400),
-                                          opacity: isSelected[i] ? 1 : 0,
-                                          child: Container(
-                                            height: 5,
-                                            decoration: BoxDecoration(
-                                              color: themeProvider.isDark
-                                                  ? Colors.lightBlue
-                                                  : Colors.blueGrey,
-                                              borderRadius: const BorderRadius.all(
-                                                Radius.circular(10),
-                                              ),
-                                            ),
-                                            width: screenSize.width / 10,
+                aspectRatio: ResponsiveWidget.isScreenLessThan500(context) ? 16/8 :16/7,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      top: ResponsiveWidget.isScreenLessThan500(context)
+                          ? screenSize.width / 2.9 : screenSize.width/3.1,
+                      left: screenSize.width / 6,
+                      right: screenSize.width / 6),
+                  child: Card(
+                      elevation: 5,
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          children: [
+                            for (int i = 0; i < Strings.destinationSliderTitle.length; i++)
+                              Column(
+                                children: [
+                                  InkWell(
+                                    splashColor: transparent,
+                                    hoverColor: transparent,
+                                    onHover: (value) {
+                                      setState(() {
+                                        value
+                                            ? isHovering[i] = true
+                                            : isHovering[i] = false;
+                                      });
+                                    },
+                                    onTap: () {
+                                      _controller.animateToPage(i);
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 5.0,right: 5.0,
+                                          top: screenSize.height / 80,
+                                          bottom: screenSize.height / 90),
+                                      child: buildTextWidget(Strings.destinationSliderTitle[i],
+                                          fontColor: themeProvider.isDark
+                                              ? isHovering[i] ? lightBlue200 : lightBlue
+                                              : isHovering[i] ? blueGrey900 : blueGrey),
+                                    ),
+                                  ),
+                                  Visibility(
+                                    maintainSize: true,
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    visible: isSelected[i],
+                                    child: AnimatedOpacity(
+                                      duration: const Duration(milliseconds: 400),
+                                      opacity: isSelected[i] ? 1 : 0,
+                                      child: Container(
+                                        height: 5,
+                                        decoration: BoxDecoration(
+                                          color: themeProvider.isDark
+                                              ? lightBlue
+                                              : blueGrey,
+                                          borderRadius: const BorderRadius.all(
+                                            Radius.circular(10),
                                           ),
                                         ),
-                                      )
-                                    ],
+                                        width: screenSize.width / 10,
+                                      ),
+                                    ),
                                   )
-                              ],
-                            )
-                        )
-                    ),
+                                ],
+                              )
+                          ],
+                        ),
+                      )
                   ),
                 ),
               )
@@ -168,8 +169,8 @@ class _DestinationsState extends State<Destinations> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   InkWell(
-                                    splashColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
+                                    splashColor: transparent,
+                                    hoverColor: transparent,
                                     onHover: (value) {
                                       setState(() {
                                         value
@@ -187,8 +188,8 @@ class _DestinationsState extends State<Destinations> {
                                       child: buildTextWidget(Strings.destinationSliderTitle[i],
                                           fontColor:
                                             themeProvider.isDark
-                                            ? isHovering[i] ? Colors.lightBlue[200]! : Colors.lightBlue
-                                            : isHovering[i] ? Colors.blueGrey[900]! : Colors.blueGrey
+                                            ? isHovering[i] ? lightBlue200 : lightBlue
+                                            : isHovering[i] ? blueGrey900 : blueGrey
                                       ),
                                     ),
                                   ),
@@ -204,8 +205,8 @@ class _DestinationsState extends State<Destinations> {
                                         height: 5,
                                         decoration: BoxDecoration(
                                           color: themeProvider.isDark
-                                          ? Colors.lightBlue
-                                          : Colors.blueGrey,
+                                          ? lightBlue
+                                          : blueGrey,
                                           borderRadius: const BorderRadius.all(
                                             Radius.circular(10),
                                           ),

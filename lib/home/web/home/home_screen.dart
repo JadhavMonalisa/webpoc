@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                          icon: Icon(themeProvider.isDark?Icons.nightlight_round:Icons.wb_sunny,color: whiteColor,)),
                      const SizedBox(width: 10.0,),
                    ],
-                   backgroundColor: appBarColor.withOpacity(opacity),)
+                   backgroundColor: blueGrey900.withOpacity(opacity),)
                      : PreferredSize(
                    preferredSize: Size(screenSize.width,1000),
                    child: CustomHomeAppBar(opacity: opacity,),

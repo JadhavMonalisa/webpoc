@@ -17,6 +17,9 @@ class ResponsiveWidget extends StatelessWidget {
     return MediaQuery.of(context).size.width >= 800 &&
         MediaQuery.of(context).size.width <= 1200;
   }
+  static bool isScreenLessThan500(BuildContext context){
+    return MediaQuery.of(context).size.width < 500;
+  }
 
   @override
   Widget build(BuildContext context) {
